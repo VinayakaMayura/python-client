@@ -40,6 +40,7 @@ from .extensions.applications import Applications
 from .extensions.clipboard import Clipboard
 from .extensions.context import Context
 from .extensions.device_time import DeviceTime
+from .extensions.execute_driver import ExecuteDriver
 from .extensions.hw_actions import HardwareActions
 from .extensions.images_comparison import ImagesComparison
 from .extensions.ime import IME
@@ -116,6 +117,7 @@ class WebDriver(
     Context,
     DeviceTime,
     Display,
+    ExecuteDriver,
     Gsm,
     HardwareActions,
     ImagesComparison,
@@ -251,7 +253,9 @@ class WebDriver(
             Use the corresponding find_element_by_* instead of this.
 
         Returns:
-            `WebElement`
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         # TODO: If we need, we should enable below converter for Web context
         # if self.w3c:
@@ -280,7 +284,9 @@ class WebDriver(
             Use the corresponding find_elements_by_* instead of this.
 
         Returns:
-            :obj:`list` of :obj:`WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         # TODO: If we need, we should enable below converter for Web context
         # if self.w3c:
@@ -311,6 +317,11 @@ class WebDriver(
 
         Usage:
             driver.find_element_by_ios_uiautomation('.elements()[1].cells()[2]')
+
+        Returns:
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         return self.find_element(by=MobileBy.IOS_UIAUTOMATION, value=uia_string)
 
@@ -324,7 +335,9 @@ class WebDriver(
             driver.find_elements_by_ios_uiautomation('.elements()[1].cells()[2]')
 
         Returns:
-            `WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         return self.find_elements(by=MobileBy.IOS_UIAUTOMATION, value=uia_string)
 
@@ -338,7 +351,9 @@ class WebDriver(
             driver.find_element_by_ios_predicate('label == "myLabel"')
 
         Returns:
-            `WebElement`
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         return self.find_element(by=MobileBy.IOS_PREDICATE, value=predicate_string)
 
@@ -352,7 +367,9 @@ class WebDriver(
             driver.find_elements_by_ios_predicate('label == "myLabel"')
 
         Returns:
-            `WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         return self.find_elements(by=MobileBy.IOS_PREDICATE, value=predicate_string)
 
@@ -366,7 +383,9 @@ class WebDriver(
             driver.find_element_by_ios_class_chain('XCUIElementTypeWindow/XCUIElementTypeButton[3]')
 
         Returns:
-            `WebElement`
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         return self.find_element(by=MobileBy.IOS_CLASS_CHAIN, value=class_chain_string)
 
@@ -380,7 +399,9 @@ class WebDriver(
             driver.find_elements_by_ios_class_chain('XCUIElementTypeWindow[2]/XCUIElementTypeAny[-2]')
 
         Returns:
-            :obj:`list` of :obj:`WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         return self.find_elements(by=MobileBy.IOS_CLASS_CHAIN, value=class_chain_string)
 
@@ -394,7 +415,9 @@ class WebDriver(
             driver.find_element_by_android_uiautomator('.elements()[1].cells()[2]')
 
         Returns:
-            `WebElement`
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         return self.find_element(by=MobileBy.ANDROID_UIAUTOMATOR, value=uia_string)
 
@@ -408,7 +431,9 @@ class WebDriver(
             driver.find_elements_by_android_uiautomator('.elements()[1].cells()[2]')
 
         Returns:
-            :obj:`list` of :obj:`WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         return self.find_elements(by=MobileBy.ANDROID_UIAUTOMATOR, value=uia_string)
 
@@ -424,7 +449,9 @@ class WebDriver(
             driver.find_element_by_android_viewtag('a tag name')
 
         Returns:
-            `WebElement`
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         return self.find_element(by=MobileBy.ANDROID_VIEWTAG, value=tag)
 
@@ -440,7 +467,9 @@ class WebDriver(
             driver.find_elements_by_android_viewtag('a tag name')
 
         Returns:
-            :obj:`list` of :obj:`WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         return self.find_elements(by=MobileBy.ANDROID_VIEWTAG, value=tag)
 
@@ -453,7 +482,9 @@ class WebDriver(
             img_path (str): a string corresponding to the path of a image
 
         Returns:
-            `WebElement`
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         with open(img_path, 'rb') as i_file:
             b64_data = base64.b64encode(i_file.read()).decode('UTF-8')
@@ -470,7 +501,9 @@ class WebDriver(
             img_path (str): a string corresponding to the path of a image
 
         Return:
-            :obj:`list` of :obj:`WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         with open(img_path, 'rb') as i_file:
             b64_data = base64.b64encode(i_file.read()).decode('UTF-8')
@@ -488,7 +521,9 @@ class WebDriver(
             driver.find_element_by_accessibility_id()
 
         Returns:
-            `WebElement`
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         return self.find_element(by=MobileBy.ACCESSIBILITY_ID, value=accessibility_id)
 
@@ -503,7 +538,9 @@ class WebDriver(
             driver.find_elements_by_accessibility_id()
 
         Returns:
-            `WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         return self.find_elements(by=MobileBy.ACCESSIBILITY_ID, value=accessibility_id)
 
@@ -520,7 +557,9 @@ class WebDriver(
             driver.find_element_by_custom("foo:bar")
 
         Returns:
-            `WebElement`
+            `appium.webdriver.webelement.WebElement`
+
+        :rtype: `MobileWebElement`
         """
         return self.find_element(by=MobileBy.CUSTOM, value=selector)
 
@@ -537,11 +576,13 @@ class WebDriver(
             driver.find_elements_by_custom("foo:bar")
 
         Returns:
-            :obj:`list` of :obj:`WebElement`
+            :obj:`list` of :obj:`appium.webdriver.webelement.WebElement`
+
+        :rtype: list of `MobileWebElement`
         """
         return self.find_elements(by=MobileBy.CUSTOM, value=selector)
 
-    def create_web_element(self, element_id):
+    def create_web_element(self, element_id, w3c=False):
         """Creates a web element with the specified element_id.
 
         Overrides method in Selenium WebDriver in order to always give them
@@ -549,11 +590,12 @@ class WebDriver(
 
         Args:
             element_id (int): The element id to create a web element
+            w3c (bool): Whether the element is W3C or MJSONWP
 
         Returns:
             `MobileWebElement`
         """
-        return MobileWebElement(self, element_id)
+        return MobileWebElement(self, element_id, w3c)
 
     def press_button(self, button_name):
         """Sends a physical button name to the device to simulate the user pressing.
@@ -566,7 +608,8 @@ class WebDriver(
             button_name (str): the button name to be sent to the device
 
         Returns:
-            `WebDriver`
+            `appium.webdriver.webdriver.WebDriver`
+
         """
         data = {
             'name': button_name
@@ -584,11 +627,11 @@ class WebDriver(
         """Set the value on an element in the application.
 
         Args:
-            element (`WebElement`: the element whose value will be set
+            element (`appium.webdriver.webelement.WebElement`: the element whose value will be set
             value (str): the value to set on the element
 
         Returns:
-            `WebDriver`
+            `appium.webdriver.webdriver.WebDriver`
         """
         data = {
             'id': element.id,
@@ -620,7 +663,7 @@ class WebDriver(
         """Open notification shade in Android (API Level 18 and above)
 
         Returns:
-            `WebDriver`
+            `appium.webdriver.webdriver.WebDriver`
         """
         self.execute(Command.OPEN_NOTIFICATIONS, {})
         return self
